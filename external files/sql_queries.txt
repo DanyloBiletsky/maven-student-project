@@ -1,0 +1,28 @@
+
+
+select * from jc_ukraine_structure where area_id like 'UA0102_____________' and area_id <> 'UA01020000000022387'
+select * from jc_ukraine_structure where area_id like 'UA01__00000000_____' and area_id <> 'UA01000000000013043'
+select * from jc_ukraine_structure where area_id like 'UA____00000000_____'
+select * from jc_ukraine_structure where area_id like 'UA8000000000_______' and area_id <> 'UA80000000000093317'
+
+SELECT so.*, ro.r_office_area_id, ro.r_office_name FROM jc_student_order so
+INNER JOIN jc_register_office ro ON ro.r_office_id = so.register_office_id
+WHERE student_order_status = ? ORDER BY student_order_date
+
+update jc_student_order set register_office_id = 2 WHERE student_order_id in (1,3,5,7)
+
+SELECT so.*, ro.r_office_area_id, ro.r_office_name,
+po_h.p_office_area_id as h_p_office_area_id, po_h_.p_office_name as h_p_office_name,
+po_w.p_office_area_id as w_p_office_area_id, po_w_.p_office_name as w_p_office_name,
+FROM jc_student_order so
+INNER JOIN jc_register_office ro ON ro.r_office_id = so.register_office_id
+INNER JOIN jc_passport_office po_h ON po_h.p_office_id = so.h_passport_office_id
+INNER JOIN jc_passport_office po_w ON po_w.p_office_id = so.w_passport_office_id
+WHERE student_order_status = ? ORDER BY student_order_date
+
+SELECT soc.*, ro.r_office_area_id, ro.r_office_name
+FROM jc_student_child soc
+INNER JOIN jc_register_office ro ON ro.r_office_id = soc.c_register_office_id
+WHERE student_order_id IN (1,2,3)
+
+ORDER BY student_order_id
