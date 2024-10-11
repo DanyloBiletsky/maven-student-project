@@ -1,6 +1,5 @@
 package edu.javaproject.studentorder.dao;
 
-import com.sun.xml.internal.bind.v2.TODO;
 import edu.javaproject.studentorder.domain.CountryArea;
 import edu.javaproject.studentorder.domain.PassportOffice;
 import edu.javaproject.studentorder.domain.RegisterOffice;
