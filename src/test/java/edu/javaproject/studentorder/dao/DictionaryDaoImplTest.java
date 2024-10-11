@@ -72,9 +72,9 @@ public class DictionaryDaoImplTest {
         List<CountryArea> caList3 = new DictionaryDaoImpl().findAreas("UA01000000000013043");
         Assert.assertTrue(caList3.size() == 2);
 
-        // Тестуємо далі...далі
+        // Тестуємо далі...
         //TODO tests
-    }git 
+    }
 
 
 
