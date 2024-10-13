@@ -48,7 +48,7 @@ CREATE TABLE city_register_addresses(
 
 INSERT INTO city_register_addresses(district_code, street_code, building, extension, apartment)
 VALUES ('UA80000000001078669', '10084', '321', null, '913'),
-VALUES ('UA80000000000624772', '10329', '2', 'А', '312');
+        ('UA80000000000624772', '10329', '2', 'А', '312');
 
 CREATE TABLE city_register_person(
     person_id SERIAL,
@@ -60,7 +60,7 @@ CREATE TABLE city_register_person(
     passport_date date,
     passport_department varchar(100),
     c_birth_certificate_number varchar(50),
-    date_of_receiving_birth_certificate date not null,
+    date_of_receiving_birth_certificate date,
     PRIMARY KEY (person_id)
 );
 
@@ -82,15 +82,16 @@ CREATE TABLE city_register_address_person(
     person_id integer not null,
     start_date date not null,
     end_date date,
+    temporal boolean DEFAULT false,
     PRIMARY KEY (person_address_id),
     FOREIGN KEY (address_id) REFERENCES city_register_addresses(address_id) ON DELETE RESTRICT,
     FOREIGN KEY (person_id) REFERENCES city_register_person(person_id) ON DELETE RESTRICT
 );
 
-INSERT INTO city_register_address_person (address_id, person_id, start_date, end_date)
-VALUES (1, 1, '2012-05-10', null),
-VALUES (1, 2, '2012-05-11', null),
-VALUES (1, 3, '2020-02-10', null),
-VALUES (1, 4, '2021-05-20', null);
+INSERT INTO city_register_address_person (address_id, person_id, start_date, end_date, temporal)
+VALUES (1, 1, '2012-05-10', null, false),
+        (1, 2, '2012-05-11', null, false),
+        (1, 3, '2020-02-10', null, false),
+        (1, 4, '2021-05-20', null, false);
 
 
