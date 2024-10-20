@@ -1,6 +1,7 @@
 package edu.javaproject.city.domain;
 
 public class PersonResponse {
+    public PersonResponse(){}
     private boolean registered;
 
     public boolean isRegistered() {

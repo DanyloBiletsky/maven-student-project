@@ -14,7 +14,7 @@ import java.util.LinkedList;
 import java.util.List;
 import static edu.javaproject.studentorder.config.Config.*;
 
-public class DictionaryDaoImpl implements DictionaryDao {
+public class  DictionaryDaoImpl implements DictionaryDao {
 
     private static final Logger logger = LoggerFactory.getLogger(DictionaryDaoImpl.class);
     private static final String GET_STREET = "SELECT street_code, street_name " +

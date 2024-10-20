@@ -47,7 +47,7 @@ CREATE TABLE city_register_addresses(
 );
 
 INSERT INTO city_register_addresses(district_code, street_code, building, extension, apartment)
-VALUES ('UA80000000001078669', '10084', '321', null, '913'),
+VALUES ('UA80000000001078669', '10084', '321', 'A', '913'),
         ('UA80000000000624772', '10329', '2', 'А', '312');
 
 CREATE TABLE city_register_person(

@@ -8,6 +8,7 @@ public class PersonRequest {
     private String name;
     private String patronymic;
     private LocalDate DateOfBirth;
+    private String streetCode;
     private String building;
     private String extension;
     private String apartment;
@@ -66,5 +67,13 @@ public class PersonRequest {
 
     public void setApartment(String apartment) {
         this.apartment = apartment;
+    }
+
+    public String getStreetCode() {
+        return streetCode;
+    }
+
+    public void setStreetCode(String streetCode) {
+        this.streetCode = streetCode;
     }
 }

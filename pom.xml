@@ -6,6 +6,7 @@
   <groupId>edu.javacourse</groupId>
   <artifactId>student-order</artifactId>
   <version>1.0-SNAPSHOT</version>
+  <packaging>war</packaging>
 
   <properties>
     <slf4j.version>2.0.16</slf4j.version>

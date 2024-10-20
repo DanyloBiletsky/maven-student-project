@@ -27,6 +27,11 @@ public class StudentDaoImpl implements StudentOrderDao{
             "\"с_post_code\", c_street_code, \"с_city\", \"с_building\", \"с_extension\", \"с_apartment\")" +
             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
+    private static final String SELECT_CHILD = "SELECT soc.*, ro.r_office_area_id, ro.r_office_name " +
+            "FROM jc_student_child soc " +
+            "INNER JOIN jc_register_office ro ON ro.r_office_id = soc.c_register_office_id " +
+            "WHERE student_order_id IN ";
+
     private static final String SELECT_ORDERS = "SELECT so.*, ro.r_office_area_id, ro.r_office_name, " +
             "po_h.p_office_area_id as h_p_office_area_id, po_h_.p_office_name as h_p_office_name, " +
             "po_w.p_office_area_id as w_p_office_area_id, po_w_.p_office_name as w_p_office_name " +
@@ -36,10 +41,6 @@ public class StudentDaoImpl implements StudentOrderDao{
             "INNER JOIN jc_passport_office po_w ON po_w.p_office_id = so.w_passport_office_id " +
             "WHERE student_order_status = ? ORDER BY student_order_date LIMIT ? ;";
 
-    private static final String SELECT_CHILD = "SELECT soc.*, ro.r_office_area_id, ro.r_office_name " +
-            "FROM jc_student_child soc " +
-            "INNER JOIN jc_register_office ro ON ro.r_office_id = soc.c_register_office_id " +
-            "WHERE student_order_id IN ";
     private final static String INSERT_ORDER = "INSERT INTO jc_student_order(" +
             "student_order_status, student_order_date," +
             "h_surname, h_name, h_patronymic, h_date_of_birth, h_passport_number, " +
@@ -62,7 +63,7 @@ public class StudentDaoImpl implements StudentOrderDao{
             "INNER JOIN jc_passport_office po_w ON po_w.p_office_id = so.w_passport_office_id " +
             "INNER JOIN jc_register_office ro_child ON ro_child.r_office_id = soc.c_register_office_id " +
             "INNER JOIN jc_student_child soc ON soc.student_order_id = so.student_order_id " +
-            "WHERE student_order_status = 0 ORDER BY student_order_id LIMIT ?";
+            "WHERE student_order_status = 0 ORDER BY student_order_id LIMIT ? OFFSET ?";
 
     private Connection getConnection() throws SQLException {
         return ConnectionBuilder.getConnection();
@@ -81,9 +82,10 @@ public class StudentDaoImpl implements StudentOrderDao{
              PreparedStatement statement = connection.prepareStatement(SELECT_ORDERS_FULL)) {
 
             Map<String, StudentOrder> maps = new HashMap<>();
-            statement.setInt(1, StudentOrderStatus.START.ordinal());
             int limit = Integer.parseInt(Config.getProperty(DB_LIMIT));
-            statement.setInt(2,limit);
+            statement.setInt(1, limit);
+
+            statement.setInt(2,StudentOrderStatus.START.ordinal());
 
             ResultSet rs = statement.executeQuery();
             int counter = 0;

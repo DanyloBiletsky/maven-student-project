@@ -4,6 +4,7 @@ import edu.javaproject.studentorder.domain.*;
 import edu.javaproject.studentorder.exception.DaoException;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.jupiter.api.Order;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -20,12 +21,14 @@ public class StudentDaoImplTest {
     }
 
     @Test
+    @Order(2)
     public void saveStudentOrderTest() throws DaoException {
         StudentOrder order = buildStudentOrder(5);
         Long id = new StudentDaoImpl().saveStudentOrder(order);
     }
 
     @Test(expected = DaoException.class)
+    @Order(1)
     public void saveStudentOrderErrorTest() throws DaoException {
         StudentOrder order = buildStudentOrder(5);
         order.getHusband().setSurname(null);
@@ -33,6 +36,7 @@ public class StudentDaoImplTest {
     }
 
     @Test
+    @Order(3)
     public void getStudentOrderTest() throws DaoException {
         List<StudentOrder> list = new StudentDaoImpl().getStudentOrders();
 
